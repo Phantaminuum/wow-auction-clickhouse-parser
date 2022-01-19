@@ -29,11 +29,11 @@ while True:
             auction['sold_at'] = now
             update_list.append(auction)
 
-    print("{date} - rows updated: {count}".format(date=now.strftime("%Y-%m-%d %H:%i:%s"), count=len(update_list)))
+    print("{date} - rows updated: {count}".format(date=now.strftime("%Y-%m-%d %H:%M:%S"), count=len(update_list)))
     persist_sold_auctions(update_list)
 
     prev_state = current_state
-    if update_list.length > 0:
+    if len(update_list) > 0:
         time.sleep(60 * 30)
     else:
         time.sleep(60 * 3)

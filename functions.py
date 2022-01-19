@@ -4,9 +4,9 @@ from clickhouse_driver import Client
 import pickle
 import os
 
-DUMP_FILE = 'data/data.dump'
+DUMP_FILE = '/app/data/data.dump'
 
-client = Client(host='localhost', port=9002)
+client = Client(host='clickhouse', user=os.environ['CLICKHOUSE_USER'], password=os.environ['CLICKHOUSE_PASSWORD'])
 
 def load_state():
     if not os.path.isfile(DUMP_FILE):
@@ -27,7 +27,7 @@ def request_current_auctions():
         'namespace': os.environ['WOW_NAMESPACE'],
         'token': os.environ['WOW_TOKEN'],
     }
-    uri = '{base_uri}/{realm}/auctions/{auction_id}?namespace={namespace}&locale=en_US&access_token={token}'.format(params)
+    uri = '{base_uri}/{realm}/auctions/{auction_id}?namespace={namespace}&locale=en_US&access_token={token}'.format(**params)
     response = requests.get(uri)
 
     return response.json()['auctions']
