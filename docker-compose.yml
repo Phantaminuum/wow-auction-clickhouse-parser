@@ -7,18 +7,14 @@ services:
         - "9002:9000"
         - "9009:9009"
       volumes:
-          - ./data/clickhouse/:/var/lib/clickhouse
-          - ./docker/clickhouse/config/config.xml:/etc/clickhouse-server/config.xml
-          # - ./docker/clickhouse/config/users.d/users.xml:/etc/clickhouse-server/users.d/default.xml
-          # - ./docker/clickhouse/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+        - ./data/clickhouse/:/var/lib/clickhouse
+        - ./docker/clickhouse/config/config.xml:/etc/clickhouse-server/config.xml
+        - ./config/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
       ulimits:
         nproc: 65535
         nofile:
           soft: 262144
           hard: 262144
-    # clickhouse-client:
-    #     image: yandex/clickhouse-client
-    #     command: ['--host', 'clickhouse']
     app:
       build: .
       restart: always
