@@ -20,5 +20,7 @@ services:
       build: src
       env_file: .env
       restart: always
+      depends_on:
+        - clickhouse
       volumes:
           - ./data/app:/app/data
