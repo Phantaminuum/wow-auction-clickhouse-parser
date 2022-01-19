@@ -17,7 +17,7 @@ services:
           soft: 262144
           hard: 262144
     app:
-      build: .
+      build: src
       env_file: .env
       restart: always
       volumes:
