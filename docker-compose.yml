@@ -2,13 +2,14 @@ version: "3.5"
 services:
     clickhouse:
       image: yandex/clickhouse-server
+      env_file: .env
       ports:
         - "8123:8123"
         - "9002:9000"
         - "9009:9009"
       volumes:
-        - ./data/clickhouse/:/var/lib/clickhouse
-        - ./docker/clickhouse/config/config.xml:/etc/clickhouse-server/config.xml
+        - ./data/clickhouse:/var/lib/clickhouse
+        - ./config/config.xml:/etc/clickhouse-server/config.xml
         - ./config/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
       ulimits:
         nproc: 65535
@@ -17,7 +18,7 @@ services:
           hard: 262144
     app:
       build: .
+      env_file: .env
       restart: always
-      network_mode: "host" 
       volumes:
-          - /data/app:/app/data
+          - ./data/app:/app/data
