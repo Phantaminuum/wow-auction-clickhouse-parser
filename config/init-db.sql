@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS wow;
-CREATE TABLE IF NOT EXISTS wow.auctions
+CREATE TABLE IF NOT EXISTS wow.auction
 (
     `id` UInt64,
     `item_id` UInt32,
